@@ -9,15 +9,16 @@ import src.part2_plot_examples as part2
 import src.part3_bar_hist as part3
 import src.part4_catplot as part4
 import src.part5_scatter as part5
+from src import part4_catplot
+from src import part5_scatter
+
 
 def main():
     ##  PART 1: ETL  ##
     # ETL the datasets into dataframes
     directories = ['data/part2_plots', 'data/part3_plots', 'data/part4_plots', 'data/part5_plots']
     part1.create_directories(directories)
-    
-    pred_universe, arrest_events, charge_counts, charge_counts_by_offense = part1.extract_transform()
-    
+    pred_universe, arrest_events, charge_counts, charge_counts_by_offense, felony_charge = part1.extract_transform()
     ##  PART 2: PLOT EXAMPLES  ##
     # Apply plot theme
     part2.seaborn_settings()
@@ -29,26 +30,17 @@ def main():
     part2.scatterplot(pred_universe)
 
     ##  PART 3: BAR PLOTS AND HISTOGRAMS  ##
-    # 1
-
-    # 2
-
-    # 3
-
-    # 4
+    
+    part3.barplot_fta(pred_universe)
+    part3.barplot_fta_by_sex(pred_universe)
+    part3.histogram_age(pred_universe)
+    part3.histogram_age_binned(pred_universe)
 
     ##  PART 4: CATEGORICAL PLOTS  ##
-    # 1
-    
-    # 2
-
-    # 3
-
+    part4_catplot.run_catplots(pred_universe)
     ##  PART 5: SCATTERPLOTS  ##
-    # 1
-    
-    # 2
-
+    part5_scatter.felony_vs_nonfelony_scatter(pred_universe)
+    part5_scatter.felony_rearrest_scatter(pred_universe)
 
 if __name__ == "__main__":
     main()
